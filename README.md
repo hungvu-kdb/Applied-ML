@@ -1,28 +1,22 @@
 ## General Idea
 
 ### Agent Flow
-User Query
-    │
-    ▼
-┌─────────────┐
-│  Supervisor │  ← Classifies intent, decides which agents to invoke
-└──────┬──────┘
-       │
-  ┌────┴─────────────────────┐
-  │                          │
-  ▼                          ▼
-Out of Scope         Parallel Processor
-  │                 ┌────────┴────────┐
-  │                 ▼                 ▼
-  │            KB Agent          SQL Agent
-  │         (document data)   (structured data)
-  │                 └────────┬────────┘
-  │                          ▼
-  │                     Synthesize
-  │                          │
-  └──────────────────────────┤
-                             ▼
-                      Final Response
+```mermaid
+flowchart TD
+    A([User Query]) --> B[Supervisor\nClassifies intent, decides which agents to invoke]
+    B -->|OUT_OF_SCOPE| C[Out of Scope]
+    B -->|kb_agent only| D[KB Agent\ndocument data]
+    B -->|sql_agent only| E[SQL Agent\nstructured data]
+    B -->|both| F[Parallel Processor]
+    F --> D2[KB Agent\ndocument data]
+    F --> E2[SQL Agent\nstructured data]
+    C --> Z([END])
+    D --> G[Synthesize]
+    E --> G
+    D2 --> G
+    E2 --> G
+    G --> H([Final Response])
+```
 
 ### Project Structure
 stock-analysis-agent/

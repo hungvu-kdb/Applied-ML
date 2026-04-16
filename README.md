@@ -42,7 +42,7 @@ stock-analysis-agent/
 │   │   └── state.py                 # Shared state schema (TypedDict)
 │   ├── nodes/
 │   │   ├── supervisor.py            # Intent classification node
-│   │   ├── kb_agent.py              # AWS Bedrock KB 
+│   │   ├── kb_agent.py              # AWS Bedrock KB agent
 │   │   ├── sql_agent.py             # AWS Redshift SQL generation & execution node
 │   │   ├── parallel_processor.py    # Runs KB + SQL agents concurrently
 │   │   ├── synthesize.py            # Final answer generation node
@@ -50,6 +50,8 @@ stock-analysis-agent/
 │   └── prompts/
 │       ├── technical_analysis.txt   # System prompt for SQL agent (price/technical data)
 │       └── financial_report.txt     # System prompt for SQL agent (financial reports)
+├── preparation/
+│   └── curated_unstructured.py      # S3/Langfuse/Bedrock processing Lambda
 ├── requirements.txt
 └── README.md
 ```
